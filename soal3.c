@@ -37,6 +37,10 @@ int main () {
 			kepiting = kepiting + 10;
 			printf("After feed, Kepiting's status: %d\n",kepiting);
 		}
+		else if (strcmp(choose,"Status")==0) {
+			printf("Lohan's Status: %d\n",lohan);
+			printf("Kepiting's Status: %d\n",kepiting);
+		}
 	}
 	}
 }
