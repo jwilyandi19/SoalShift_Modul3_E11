@@ -13,24 +13,25 @@ int main () {
 	strcpy(list_gun[4],"SPG1-V3");
 	strcpy(list_gun[5],"MINE");
 	char gun[15];
-	int adding;
-	printf("You are a seller. You can see stock or add your stock\n");
+	int buy;
+	printf("You are a buyer. You can see stock or buy gun\n");
 	char choose[6];
 	while(1) {
-		printf("\nChoose List or Add\n");
+		printf("\nChoose List or Buy\n");
 		scanf("%s",choose);
 		if(strcmp(choose,"List")==0) {
 			for(int i=0; i<6; i++) {
-				if(stock[i]>0)
 					printf("%s %d\n",list_gun[i],stock[i]);
 				
 			}
 		}
-		else if (strcmp(choose,"Add")==0) {
-			scanf("%s %d",gun,&adding);
+		else if (strcmp(choose,"Buy")==0) {
+			scanf("%s %d",gun,&buy);
 			for(int i=0; i<6; i++) {
 				if(strcmp(list_gun[i],gun)==0) {
-					stock[i] = stock[i] + adding;
+					
+					if(buy > stock[i]) printf("barang di stock tidak cukup\n");
+					else stock[i] = stock[i] - buy;
 				}
 			}
 		}
