@@ -7,6 +7,19 @@
 int lohan;
 int kepiting;
 
+void *declohan (void *arg) {
+	while(1) {
+	sleep(10);
+	lohan = lohan - 15;
+	if(lohan<=0 || kepiting<=0 || lohan>100 || kepiting>100) {
+		printf("\nGame Over\n");
+		exit(EXIT_FAILURE);
+	}
+	else {
+		printf("\nYour Lohan's status has been decreased by 15\n");
+	}
+	}
+}
 
 
 int main () {
@@ -15,12 +28,12 @@ int main () {
 	kepiting = 100;
 	char choose[12];
 	
-	//pthread_create(&(tid1),NULL,&declohan,NULL);
+	pthread_create(&(tid1),NULL,&declohan,NULL);
 	//pthread_create(&(tid2),NULL,&deckepiting,NULL);
 
 	while(1) {
 	if(lohan<=0 || kepiting<=0 || lohan>100 || kepiting>100) {
-		printf("Game Ends\n");
+		printf("\nGame Over\n");
 		break;
 	}
 	else {
@@ -28,17 +41,17 @@ int main () {
 		printf("If you want to see their status, choose Status\n");
 		scanf("%s",choose);		
 		if(strcmp(choose,"Lohan")==0) {
-			printf("Your Lohan's previous status: %d\n",lohan);			
+			printf("\nYour Lohan's previous status: %d\n",lohan);			
 			lohan = lohan + 10;
 			printf("After feed, Lohan's status: %d\n",lohan);
 		}
 		else if (strcmp(choose,"Kepiting")==0) {
-			printf("Your Kepiting's previous status: %d\n",kepiting);
+			printf("\nYour Kepiting's previous status: %d\n",kepiting);
 			kepiting = kepiting + 10;
 			printf("After feed, Kepiting's status: %d\n",kepiting);
 		}
 		else if (strcmp(choose,"Status")==0) {
-			printf("Lohan's Status: %d\n",lohan);
+			printf("\nLohan's Status: %d\n",lohan);
 			printf("Kepiting's Status: %d\n",kepiting);
 		}
 	}
