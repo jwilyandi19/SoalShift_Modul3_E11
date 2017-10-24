@@ -21,6 +21,20 @@ void *declohan (void *arg) {
 	}
 }
 
+void *deckepiting (void *arg) {
+	while(1) {
+	sleep(20);
+	kepiting = kepiting - 10;
+	if(lohan<=0 || kepiting<=0 || lohan>100 || kepiting>100) {
+		printf("\nGame Over\n");
+		exit(EXIT_FAILURE);
+	}
+	else {
+		printf("\nYour Kepiting's status has been decreased by 10\n");
+	}
+	}
+}	
+
 
 int main () {
 	pthread_t tid1,tid2;
@@ -29,7 +43,7 @@ int main () {
 	char choose[12];
 	
 	pthread_create(&(tid1),NULL,&declohan,NULL);
-	//pthread_create(&(tid2),NULL,&deckepiting,NULL);
+	pthread_create(&(tid2),NULL,&deckepiting,NULL);
 
 	while(1) {
 	if(lohan<=0 || kepiting<=0 || lohan>100 || kepiting>100) {
