@@ -15,8 +15,8 @@ int main () {
 	kepiting = 100;
 	char choose[12];
 	
-	pthread_create(&(tid1),NULL,&declohan,NULL);
-	pthread_create(&(tid2),NULL,&deckepiting,NULL);
+	//pthread_create(&(tid1),NULL,&declohan,NULL);
+	//pthread_create(&(tid2),NULL,&deckepiting,NULL);
 
 	while(1) {
 	if(lohan<=0 || kepiting<=0 || lohan>100 || kepiting>100) {
@@ -33,9 +33,10 @@ int main () {
 			printf("After feed, Lohan's status: %d\n",lohan);
 		}
 		else if (strcmp(choose,"Kepiting")==0) {
-			printf("Your Kepiting's previous status: %d\n".kepiting);
+			printf("Your Kepiting's previous status: %d\n",kepiting);
 			kepiting = kepiting + 10;
 			printf("After feed, Kepiting's status: %d\n",kepiting);
 		}
 	}
 	}
+}
