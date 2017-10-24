@@ -1,8 +1,12 @@
 #include<stdio.h>
 #include<unistd.h>
 #include<string.h>
+#include<sys/ipc.h>
+#include<sys/shm.h>
 
 int main () {
+
+	key_t key = 1234;
 
 	char list_gun[6][15];
 	int *stock;
@@ -12,6 +16,8 @@ int main () {
 	strcpy(list_gun[3],"SS2-V5");
 	strcpy(list_gun[4],"SPG1-V3");
 	strcpy(list_gun[5],"MINE");
+	int shmid = shmget(key,sizeof(int),IPC_CREAT | 0666);
+	stock = shmat(shmid,NULL,0);
 	char gun[15];
 	int adding;
 	printf("You are a seller. You can see stock or add your stock\n");
@@ -35,4 +41,6 @@ int main () {
 			}
 		}
 	}
+	shmdt(stock);
+	shmctl(shmid,IPC_RMID,NULL);
 }
