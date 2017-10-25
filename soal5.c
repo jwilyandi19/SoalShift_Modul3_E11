@@ -26,17 +26,18 @@ void *searchnovel(void *kata2)
     return NULL;
 }
 
-int main () {
+int main (int n, char *x[]) {
 
     char temp[50];
     pthread_t tid[100];
-    int i=0;
+    int i;
     struct kata *kata2;
-    while(1)
+
+    for(i=1;i<n;i++)
     {
+        *kata2.huruf=x[i]
         kata2 = malloc(sizeof(struct kata));
         scanf("%s",(*kata2).huruf);
         pthread_create(&(tid[i]),NULL,&searchnovel,(void*) kata2);
-        i++;
     }
 }
