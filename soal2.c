@@ -13,6 +13,7 @@ int score1=0,score2=0,have1=16,have2=16;
 int bet;
 int picked;
 int stat;
+int guess[5];
 
 int status_returner() {
 	if(score1==10 || score2==10 || have1==0 || have2==0) return 3;
@@ -38,9 +39,11 @@ void *play1 (void *arg) {
 		}
 		printf("%s's turn, let's guess\n",player1);
 
-		scanf("%d",&picked);
+		for(int i=0; i<4; i++) scanf("%d",&guess[i]);
 
-		if(hole2[picked]==0) {
+		for(int i=0; i<4; i++) {
+		
+		if(hole2[guess[i]]==0) {
 			printf("%s: +1\n",player1);
 			score1++;
 		}
@@ -52,6 +55,7 @@ void *play1 (void *arg) {
 		if(status_returner()==3) {
 			stat = 3;
 			return NULL;
+		}
 		}
 	}
 }
@@ -66,9 +70,10 @@ void *play2 (void *arg) {
 		}
 		printf("%s's turn, let's guess\n",player2);
 
-		scanf("%d",&picked);
+		for(int i=0; i<4; i++) scanf("%d",&guess[i]);
+		for(int i=0; i<4; i++) {
 
-		if(hole1[picked]==0) {
+		if(hole1[guess[i]]==0) {
 			printf("%s: +1\n",player2);
 			score2++;
 		}
@@ -80,6 +85,7 @@ void *play2 (void *arg) {
 		if(status_returner()==3) {
 			stat = 3;
 			return NULL;
+		}
 		}
 		printf("%s's turn, your score: %d\n",player2,score2);
 		printf("Let's pick\n");
@@ -113,4 +119,12 @@ int main () {
 
 	pthread_join(tid1,NULL);
 	pthread_join(tid2,NULL);
+
+	while(stat!=3) {
+		printf("Game over\n");
+		printf("%s's score: %d\n",player1,score1);
+		printf("%s's score: %d\n",player2,score2);
+		if(score1>score2) printf("%s wins\n",player1);
+		else printf("%s wins\n",player2);
+	}
 }
