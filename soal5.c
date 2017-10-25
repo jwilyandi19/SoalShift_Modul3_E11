@@ -4,26 +4,23 @@
 #include<pthread.h>
 #include<stdlib.h>
 
-struct kata {
-    char huruf[50];
-};
-
-void *searchnovel(void *kata2)
+void *searchnovel(void *arg)
 {
-	printf("casn\n");
+	//printf("casn\n");
     char x[50];
     int ans=0;
-    struct kata *my_kata = (struct kata*)kata2;
-    printf("cok %s",my_kata->huruf);
+	char find[50];
+	
+    strcpy(find,arg);
+	//printf("String Found: %s\n",find);
     FILE *fp;
-    fp = fopen("/home/farras/SoalShift_Modul3_E11/Novel.txt","r");
-    while (fscanf(fp,"%s", x) == 1) {
+    fp = fopen("Novel.txt","r");
+    while (fscanf(fp,"%s",x) == 1) {
 	//printf("%s",x);
-        if(strstr(x,my_kata->huruf)!=NULL)ans++;
+        if(strstr(x,find)!=NULL)ans++;
     }
 
-    printf("%s : %d\n",my_kata->huruf,ans);
-    free(kata2);
+    printf("%s : %d\n",find,ans);
     return NULL;
 }
 
@@ -31,14 +28,13 @@ int main (int n, char *x[]) {
 
     pthread_t tid[100];
     int i;
-    struct kata *kata2;
+	//printf("n: %d\n",n);
     for(i=1;i<n;i++)
-    {
-	kata2 = malloc(sizeof(struct kata));
-	strcpy((*kata2).huruf,x[i]);        
-	printf("hai %s\n",kata2->huruf);
+    {       
+	//printf("hai %s\n",x[i]);
 		
-	int err=pthread_create(&(tid[i]),NULL,&searchnovel,(void*) kata2);
-    	printf("trad %d\n",err);
+	pthread_create(&(tid[i]),NULL,&searchnovel,(void*) x[i]);
+    	//printf("trad %d\n",err);
      }
+	for(i=1; i<n; i++) pthread_join(tid[i],NULL);
 }
