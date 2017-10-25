@@ -23,10 +23,10 @@ void *play1 (void *arg) {
 	
 	while(1) {
 		printf("%s's turn, your score: %d\n",player1,score1);
-		printf("Let's pick\n");
+		printf("Let's pick some holes (max 4)\n");
 		stat = 0;
 		scanf("%d",&bet);
-
+		printf("Let's choose %d hole(s)\n",bet);
 		while(bet--) {
 			
 			scanf("%d",&picked);
@@ -39,11 +39,9 @@ void *play1 (void *arg) {
 		}
 		printf("%s's turn, let's guess\n",player1);
 
-		for(int i=0; i<4; i++) scanf("%d",&guess[i]);
-
-		for(int i=0; i<4; i++) {
+		scanf("%d",&picked);
 		
-		if(hole2[guess[i]]==0) {
+		if(hole2[picked]==0) {
 			printf("%s: +1\n",player1);
 			score1++;
 		}
@@ -56,7 +54,7 @@ void *play1 (void *arg) {
 			stat = 3;
 			return NULL;
 		}
-		}
+		
 	}
 }
 		
@@ -70,10 +68,9 @@ void *play2 (void *arg) {
 		}
 		printf("%s's turn, let's guess\n",player2);
 
-		for(int i=0; i<4; i++) scanf("%d",&guess[i]);
-		for(int i=0; i<4; i++) {
+		scanf("%d",&picked);
 
-		if(hole1[guess[i]]==0) {
+		if(hole1[picked]==0) {
 			printf("%s: +1\n",player2);
 			score2++;
 		}
@@ -86,12 +83,12 @@ void *play2 (void *arg) {
 			stat = 3;
 			return NULL;
 		}
-		}
+		
 		printf("%s's turn, your score: %d\n",player2,score2);
-		printf("Let's pick\n");
+		printf("Let's pick some holes (max 4)\n");
 
 		scanf("%d",&bet);
-
+		printf("Let's choose %d hole(s)\n",bet);
 		while(bet--) {
 			
 			scanf("%d",&picked);
@@ -120,11 +117,10 @@ int main () {
 	pthread_join(tid1,NULL);
 	pthread_join(tid2,NULL);
 
-	while(stat!=3) {
+	while(stat!=3);
 		printf("Game over\n");
 		printf("%s's score: %d\n",player1,score1);
 		printf("%s's score: %d\n",player2,score2);
 		if(score1>score2) printf("%s wins\n",player1);
 		else printf("%s wins\n",player2);
-	}
 }
