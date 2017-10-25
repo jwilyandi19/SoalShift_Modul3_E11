@@ -4,34 +4,31 @@
 #include<pthread.h>
 #include<stdlib.h>
 
-struct angka {
-    int number;
-};
 
 void *faktorial(void *angka2)
 {
-    int ans=1;
-    struct angka *my_angka = (struct angka*)angka2;
-
-    int limit=my_angka->number
+    int limit = (int*)angka2;
+	int ans = 1;
 
     for(int i=1; i<=limit; i++)
         ans*=i;
 
     printf("Hasil %d! = %d\n",limit,ans);
-    free(angka2);
     return NULL;
 }
 
-int main () {
+int main (int n, char *x[]) {
+
     pthread_t tid[100];
-    int i=0;
-    struct angka *angka2;
-    while(1)
-    {
-        angka2 = malloc(sizeof(struct angka));
-        scanf("%d",(*angka2).number);
-        pthread_create(&(tid[i]),NULL,&faktorial,(void*) angka2);
-        i++;
-    }
+    int i;
+	int num;
+	//printf("n: %d\n",n);
+    for(i=1;i<n;i++)
+    {       
+	num = atoi(x[i]);
+		
+	pthread_create(&(tid[i]),NULL,&faktorial,(void*) num);
+	pthread_join(tid[i],NULL);
+    	//printf("trad %d\n",err);
+     }
 }
