@@ -10,10 +10,11 @@ struct kata {
 
 void *searchnovel(void *kata2)
 {
+	printf("casn\n");
     char x[50];
     int ans=0;
     struct kata *my_kata = (struct kata*)kata2;
-    //printf("cok %s",my_kata->huruf);
+    printf("cok %s",my_kata->huruf);
     FILE *fp;
     fp = fopen("/home/farras/SoalShift_Modul3_E11/Novel.txt","r");
     while (fscanf(fp,"%s", x) == 1) {
@@ -28,16 +29,16 @@ void *searchnovel(void *kata2)
 
 int main (int n, char *x[]) {
 
-    char temp[50];
     pthread_t tid[100];
     int i;
     struct kata *kata2;
-
     for(i=1;i<n;i++)
     {
-        *kata2.huruf=x[i]
-        kata2 = malloc(sizeof(struct kata));
-        scanf("%s",(*kata2).huruf);
-        pthread_create(&(tid[i]),NULL,&searchnovel,(void*) kata2);
-    }
+	kata2 = malloc(sizeof(struct kata));
+	strcpy((*kata2).huruf,x[i]);        
+	printf("hai %s\n",kata2->huruf);
+		
+	int err=pthread_create(&(tid[i]),NULL,&searchnovel,(void*) kata2);
+    	printf("trad %d\n",err);
+     }
 }
