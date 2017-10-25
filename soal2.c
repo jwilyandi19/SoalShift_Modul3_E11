@@ -56,7 +56,45 @@ void *play1 (void *arg) {
 	}
 }
 		
+void *play2 (void *arg) {
+	
+	while(1) {
+		stat = 0;
+
+		while(stat==0 || stat==3) {
+			if(stat==3) return NULL;
+		}
+		printf("%s's turn, let's guess\n",player2);
+
+		scanf("%d",&picked);
+
+		if(hole1[picked]==0) {
+			printf("%s: +1\n",player2);
+			score2++;
+		}
+		else {
+			printf("%s: +1\n",player1);
+			score1++;
+		}
+
+		if(status_returner()==3) {
+			stat = 3;
+			return NULL;
+		}
+		printf("%s's turn, your score: %d\n",player2,score2);
+		printf("Let's pick\n");
+
+		scanf("%d",&bet);
+
+		while(bet--) {
 			
+			scanf("%d",&picked);
+			if(hole2[picked]==0) have2 = have2-1;
+			hole2[picked] = 1;
+		}
+		stat = 2;
+	}
+}			
 
 
 int main () {
@@ -71,8 +109,8 @@ int main () {
 	}
 
 	pthread_create(&(tid1),NULL,&play1,NULL);
-	//pthread_create(&(tid2),NULL,&play2,NULL);
+	pthread_create(&(tid2),NULL,&play2,NULL);
 
 	pthread_join(tid1,NULL);
-	//pthread_join(tid2,NULL);
+	pthread_join(tid2,NULL);
 }
