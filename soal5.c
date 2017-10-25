@@ -13,16 +13,15 @@ void *searchnovel(void *kata2)
     char x[50];
     int ans=0;
     struct kata *my_kata = (struct kata*)kata2;
-
+    //printf("cok %s",my_kata->huruf);
     FILE *fp;
-    fp = fopen("/home/farras/modul3/salin1.txt","r");
-
-
-    while (fscanf(f, " %s", x) == 1) {
-        if(strcmp(x,my_kata)==0)ans++;
+    fp = fopen("/home/farras/SoalShift_Modul3_E11/Novel.txt","r");
+    while (fscanf(fp,"%s", x) == 1) {
+	//printf("%s",x);
+        if(strstr(x,my_kata->huruf)!=NULL)ans++;
     }
 
-    printf("%d\n",ans);
+    printf("%s : %d\n",my_kata->huruf,ans);
     free(kata2);
     return NULL;
 }
@@ -35,9 +34,8 @@ int main () {
     struct kata *kata2;
     while(1)
     {
-        scanf("%s",temp);
         kata2 = malloc(sizeof(struct kata));
-        (*kata).huruf = temp;
+        scanf("%s",(*kata2).huruf);
         pthread_create(&(tid[i]),NULL,&searchnovel,(void*) kata2);
         i++;
     }
